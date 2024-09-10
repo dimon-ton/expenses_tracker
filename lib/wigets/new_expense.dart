@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
@@ -10,18 +9,35 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
+  var _enteredTitle = '';
+
+  void _saveTitleInput(String inputValue) {
+    _enteredTitle = inputValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(25),
       child: Column(
-        children: const [
+        children: [
           TextField(
+            onChanged: _saveTitleInput,
             maxLength: 50,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               label: Text('Title'),
             ),
           ),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  print(_enteredTitle);
+                },
+                child: const Text('Save Expense'),
+              ),
+            ],
+          )
         ],
       ),
     );
